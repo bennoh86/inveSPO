@@ -7,10 +7,9 @@ import altair as alt
 import pandas as pd
 
 
-# Set the title and favicon that appear in the Browser's tab bar.
+# Set the title that appears in the Browser's tab bar.
 st.set_page_config(
-    page_title="Inventory tracker",
-    page_icon=":shopping_bags:",  # This is an emoji shortcode. Could be a URL too.
+    page_title="Stor inventori tracker",
 )
 
 
@@ -170,12 +169,30 @@ def update_data(conn, df, changes):
 # Draw the actual page, starting with the inventory table.
 
 # Set the title that appears at the top of the page.
-"""
-# :shopping_bags: Inventory tracker
+LOGO_PATH = Path(__file__).parent / "LogoSPO_trans_ChatGPT.png"
 
-**Welcome to Alice's Corner Store's intentory tracker!**
-This page reads and writes directly from/to our inventory database.
-"""
+if LOGO_PATH.exists():
+    try:
+        from PIL import Image
+
+        with Image.open(LOGO_PATH) as img:
+            img.verify()
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.image(str(LOGO_PATH), width=140)
+            st.markdown("<div style='margin-right: 20px;'></div>", unsafe_allow_html=True)
+    except Exception:
+        pass
+
+st.markdown(
+    "<h1 style='margin:0 0 1rem 0; text-align:center;'>Stor inventori tracker</h1>",
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    "Welcome to SPO stor's inventori tracker"
+    "\nThis page reads and writes directly from/to our inventory database."
+)
 
 st.info(
     """
